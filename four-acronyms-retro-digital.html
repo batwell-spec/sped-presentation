@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background: #0a0e27;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 20, 147, 0.03),
+        rgba(255, 20, 147, 0.03) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .container {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 60px 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      margin-top: 20px;
+    }
+
+    .coming-soon {
+      font-size: 18px;
+      color: #ff1493;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #ff1493;
+    }
+
+    .title {
+      font-family: 'Arial Black', sans-serif;
+      font-size: 72px;
+      color: #ffffff;
+      margin: 0 0 15px 0;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-weight: 900;
+      text-shadow: 0 0 15px #00ff88, 0 0 30px rgba(0, 255, 136, 0.4),
+                   2px 2px 0 #ff1493, 4px 4px 0 rgba(255, 20, 147, 0.2);
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      font-size: 18px;
+      color: #cccccc;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    .divider {
+      width: 100px;
+      height: 3px;
+      background: linear-gradient(90deg, #00ff88, #ff1493, #00ff88);
+      margin: 25px auto;
+      box-shadow: 0 0 15px #00ff88;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      width: 100%;
+      max-width: 1000px;
+      margin-bottom: 50px;
+    }
+
+    .card {
+      background: linear-gradient(135deg, rgba(0, 51, 102, 0.4), rgba(0, 102, 153, 0.3));
+      border: 3px solid #00ccff;
+      border-radius: 0;
+      padding: 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 204, 255, 0.3),
+                  inset 0 0 15px rgba(0, 255, 136, 0.05);
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 20, 147, 0.05),
+        rgba(255, 20, 147, 0.05) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+    }
+
+    .acronym {
+      font-family: 'Arial Black', sans-serif;
+      font-size: 64px;
+      color: #ff1493;
+      margin: 0 0 20px 0;
+      text-transform: uppercase;
+      font-weight: 900;
+      text-shadow: 0 0 15px #ff1493, 0 0 30px rgba(255, 20, 147, 0.5);
+      letter-spacing: 3px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .meaning {
+      font-size: 12px;
+      color: #00ccff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 15px 0;
+      text-shadow: 0 0 8px #00ccff;
+      font-weight: 600;
+      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tagline {
+      font-size: 16px;
+      color: #ffffff;
+      font-weight: 700;
+      margin-top: 15px;
+      font-style: italic;
+      text-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 2px solid #ff1493;
+      box-shadow: 0 -2px 15px rgba(255, 20, 147, 0.2);
+      margin-top: 40px;
+    }
+
+    .footer-text {
+      font-size: 14px;
+      color: #ff1493;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin: 0;
+      text-shadow: 0 0 10px #ff1493;
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <p class="coming-soon">🎬 COMING SOON 🎬</p>
+    <h1 class="title">Four Acronyms<br>One Promise</h1>
+    <div class="divider"></div>
+    <p class="subtitle">A Federal Law. Every Student. No Exceptions.</p>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="acronym">IDEA</div>
+      <div class="meaning">Individuals with Disabilities<br>Education Act</div>
+      <div class="tagline">"The Federal Promise"</div>
+    </div>
+
+    <div class="card">
+      <div class="acronym">FAPE</div>
+      <div class="meaning">Free Appropriate<br>Public Education</div>
+      <div class="tagline">"No Asterisks. No Fine Print."</div>
+    </div>
+
+    <div class="card">
+      <div class="acronym">IEP</div>
+      <div class="meaning">Individualized<br>Education Program</div>
+      <div class="tagline">"The Personalized Blueprint"</div>
+    </div>
+
+    <div class="card">
+      <div class="acronym">LRE</div>
+      <div class="meaning">Least Restrictive<br>Environment</div>
+      <div class="tagline">"The right place. The best place. Your place."</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p class="footer-text">▸▸ GENERAL ED STAFF: YOU'RE IN THIS STORY ◀◀</p>
+  </div>
+</div>
+
+</body>
+</html>
