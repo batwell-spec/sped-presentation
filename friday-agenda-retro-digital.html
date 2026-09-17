@@ -1,0 +1,261 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background: #0a0e27;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 20, 147, 0.03),
+        rgba(255, 20, 147, 0.03) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    .container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 80px 60px;
+      min-height: 100vh;
+      gap: 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .title {
+      font-family: 'Arial Black', sans-serif;
+      font-size: 64px;
+      color: #00ff88;
+      margin: 0 0 20px 0;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-weight: 900;
+      text-shadow: 0 0 10px #00ff88, 0 0 20px rgba(0, 255, 136, 0.5), 
+                   2px 2px 0 #ff1493, 4px 4px 0 rgba(255, 20, 147, 0.3);
+    }
+
+    .subtitle {
+      font-size: 16px;
+      color: #00ccff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 600;
+      margin: 0;
+      text-shadow: 0 0 8px #00ccff;
+    }
+
+    .divider {
+      width: 80px;
+      height: 3px;
+      background: linear-gradient(90deg, #ff1493, #00ff88, #ff1493);
+      margin: 20px auto 0;
+      box-shadow: 0 0 15px #ff1493;
+    }
+
+    .agenda-list {
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      width: 100%;
+      max-width: 700px;
+    }
+
+    .agenda-item {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .agenda-item::before {
+      content: '';
+      position: absolute;
+      left: -20px;
+      width: 4px;
+      height: 100%;
+      background: #00ff88;
+      box-shadow: 0 0 10px #00ff88;
+    }
+
+    .badge {
+      background: linear-gradient(135deg, #ff1493, #ff69b4);
+      color: #000000;
+      width: 70px;
+      height: 70px;
+      border-radius: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Arial Black', sans-serif;
+      font-size: 32px;
+      font-weight: 900;
+      flex-shrink: 0;
+      box-shadow: 0 0 20px #ff1493, 0 0 40px rgba(255, 20, 147, 0.6),
+                  inset 0 0 20px rgba(255, 255, 255, 0.2);
+      border: 3px solid #00ff88;
+      letter-spacing: 2px;
+      position: relative;
+    }
+
+    .badge::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+    }
+
+    .button-pill {
+      background: linear-gradient(135deg, rgba(0, 51, 102, 0.8), rgba(0, 102, 153, 0.6));
+      border: 3px solid #00ccff;
+      border-radius: 15px;
+      padding: 25px 35px;
+      flex-grow: 1;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(0, 204, 255, 0.3),
+                  inset 0 0 10px rgba(0, 255, 136, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .button-title {
+      font-size: 18px;
+      color: #00ff88;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #00ff88;
+      font-family: 'Arial Black', sans-serif;
+    }
+
+    .button-meta {
+      font-size: 13px;
+      color: #00ccff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin: 0;
+      text-shadow: 0 0 5px #00ccff;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 2px solid #ff1493;
+      box-shadow: 0 -2px 15px rgba(255, 20, 147, 0.3);
+      position: relative;
+    }
+
+    .footer-text {
+      margin: 0 0 15px 0;
+      font-weight: 700;
+      color: #00ff88;
+      font-size: 16px;
+      text-shadow: 0 0 10px #00ff88;
+      letter-spacing: 1px;
+    }
+
+    .resource-link {
+      color: #ff1493;
+      text-decoration: none;
+      font-weight: 700;
+      font-family: 'Arial Black', sans-serif;
+      display: inline-block;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      padding: 8px 16px;
+      border: 2px solid #ff1493;
+      box-shadow: 0 0 10px rgba(255, 20, 147, 0.5);
+    }
+
+    .resource-link:hover {
+      color: #00ff88;
+      border-color: #00ff88;
+      background: rgba(0, 255, 136, 0.1);
+      box-shadow: 0 0 20px #00ff88;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1 class="title">Friday All Staff</h1>
+    <p class="subtitle">System Online — Meeting Initialized</p>
+    <div class="divider"></div>
+  </div>
+
+  <div class="agenda-list">
+    <div class="agenda-item">
+      <div class="badge">01</div>
+      <div class="button-pill">
+        <p class="button-title">Teacher of Record & IEP Input</p>
+        <p class="button-meta">PG. 03 | PRIORITY PROTOCOL</p>
+      </div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="badge">02</div>
+      <div class="button-pill">
+        <p class="button-title">Ownership & Layered Responsibility</p>
+        <p class="button-meta">PG. 05 | SYSTEM DEPLOYMENT</p>
+      </div>
+    </div>
+
+    <div class="agenda-item">
+      <div class="badge">03</div>
+      <div class="button-pill">
+        <p class="button-title">The Special Education Promise: FAPE</p>
+        <p class="button-meta">PG. 07 | CORE DIRECTIVE</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p class="footer-text">▸▸ EVERY TEACHER. EVERY STUDENT. ONE PROMISE. ◀◀</p>
+    <a href="https://canva.link/31dnec380yazp8y" class="resource-link">→ FAPE RESOURCE ←</a>
+  </div>
+</div>
+
+</body>
+</html>
